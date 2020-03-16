@@ -21,6 +21,7 @@ public class AccountManagement extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 
+		//アカウント管理画面をフォワードする
 		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/AccountManagement.jsp");
 		dispatcher.forward(request, response);
 
@@ -46,13 +47,28 @@ public class AccountManagement extends HttpServlet {
 
 			//コミット
 			conn.commit();
+			
+			//画面分岐
+			boolean b = true;
+			
 		}catch (Exception ex) {
 
 			conn.rollback();      //ロールバック
 			ex.printStackTrace(); //エラー内容を表示する
+			boolean b = false;
 
 		}finally {
 
+			if(
+					b == true){
+				//アカウント変更成功画面をフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/AccountChangeResulte.jsp");
+				dispatcher.forward(request, response);
+			}else {
+				//アカウント変更失敗画面をフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/AccountChangeFailure.jsp");
+				dispatcher.forward(request, response);
+			}
 		}
 
 	}
