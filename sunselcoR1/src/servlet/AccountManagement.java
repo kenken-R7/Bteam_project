@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import model.dao.UserDAO;
+
 //アカウント管理画面をフォワードするサーブレット
 @WebServlet("/AccountManagement")
 public class AccountManagement extends HttpServlet {
@@ -47,10 +49,10 @@ public class AccountManagement extends HttpServlet {
 
 			//コミット
 			conn.commit();
-			
+
 			//画面分岐
 			boolean b = true;
-			
+
 		}catch (Exception ex) {
 
 			conn.rollback();      //ロールバック
