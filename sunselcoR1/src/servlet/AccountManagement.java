@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.PreparedStatement;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -8,8 +9,6 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import model.dao.UserDAO;
 
 //アカウント管理画面をフォワードするサーブレット
 @WebServlet("/AccountManagement")
@@ -42,7 +41,7 @@ public class AccountManagement extends HttpServlet {
 
 		try {
 			//変更するDBのパラメータとSQL文を指定する。
-			ps = conn.prepareStatement(sql);
+			PreparedStatement ps = conn.prepareStatement(sql);
 
 			//UPDATE文を実行する
 			int i = ps.executeUpdate();
