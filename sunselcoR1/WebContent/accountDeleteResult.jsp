@@ -12,7 +12,7 @@
 	<form action="index.jsp" method="POST">
 		<input type="submit" value="はい">
 	</form>
-	<form action="menu.jsp" method="POST">
+	<form action="accountManagement.jsp" method="POST">
 		<input type="submit" value="いいえ">
 	</form>
 </body>
