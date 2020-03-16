@@ -4,16 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>アカウント削除画面</title>
+<title>リンク</title>
 </head>
 <body>
-	本当に削除しますか？
+	サンセルコHP<br>
+	<a href="http://sunselco.com/">サンセルコ公式HPへ</a>
 
-	<form action="index.jsp" method="POST">
-		<input type="submit" value="はい">
-	</form>
 	<form action="menu.jsp" method="POST">
-		<input type="submit" value="いいえ">
+		<input type="submit" value="メニューに戻る">
 	</form>
 </body>
 </html>
