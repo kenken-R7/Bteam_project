@@ -8,13 +8,13 @@
 </head>
 <body>
 	<h2>ログインページ</h2>
-	<form action="/sunselcoR1/LoginConteroller" method="post">
-		<label> 
-		ID:<input type="text" name="id" pattern="^[0-9A-Za-z]+$" required>（半角英数）※必須
-		</label><br> 
+	<form action="/sunselco/LoginConterollerServlet" method="post">
 		<label>
-		 パスワード:<input type="text" name="password" pattern="^[0-9A-Za-z]+$" required>（半角英数）※必須
-		</label><br> 
+		ID:<input type="text" name="id" pattern="^[0-9A-Za-z]+$" required>（半角英数）※必須
+		</label><br>
+		<label>
+		 パスワード:<input type="password" name="password" pattern="^[0-9A-Za-z]+$" required>（半角英数）※必須
+		</label><br>
 		<input type="submit" value="ログイン"><br>
 	</form>
 
@@ -23,6 +23,3 @@
 	</form>
 </body>
 </html>
-
-
-

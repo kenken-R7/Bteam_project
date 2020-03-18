@@ -1,29 +1,19 @@
-package model.dao;
+package dao;
 
-/*
- * WebApp_t-ex01
- * model.dao.ConnectionManager.java
- */
+
 
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-/**
- * コネクションマネージャ
- * @author emBex Education
- */
+
 public class ConnectionManager {
 
-	/**
-	 * データベースURL
-	 */
-	private final static String URL = "jdbc:mysql://localhost:3306/sunselco?useSSL=false";
+	
+	private final static String URL = "jdbc:postgresql://localhost:5432/sunselco?useSSL=false";
 
-	/**
-	 * ユーザ
-	 */
+	
 	private final static String USER = "postgres";
 
 	/**
@@ -41,7 +31,7 @@ public class ConnectionManager {
 	public static Connection getConnection() throws SQLException, ClassNotFoundException {
 
 		// JDBCドライバの読み込み
-		Class.forName("com.mysql.jdbc.Driver");
+		Class.forName("org.postgresql.Driver");
 		return DriverManager.getConnection(URL, USER, PASSWORD);
 
 	}

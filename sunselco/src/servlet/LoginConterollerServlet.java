@@ -1,6 +1,7 @@
 package servlet;
 
 import java.io.IOException;
+import java.sql.SQLException;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -10,74 +11,75 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import model.dao.UserDAO;
+import dao.UserDAO;
 
 /**
- * ログイン認証処理を制御する
- * @author emBex Education
+ * Servlet implementation class LoginConterollerServlet
  */
-@WebServlet("/login-servlet")
-public class LoginServlet extends HttpServlet {
+@WebServlet("/LoginConterollerServlet")
+public class LoginConterollerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-	/**
-	 * @see HttpServlet#HttpServlet()
-	 */
-	public LoginServlet() {
-		super();
-		// TODO Auto-generated constructor stub
-	}
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public LoginConterollerServlet() {
+        super();
+        // TODO Auto-generated constructor stub
+    }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-		doPost(request, response);
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String url = null; //画面遷移先
 
 		// リクエストオブジェクトのエンコーディング方式の指定
 		request.setCharacterEncoding("UTF-8");
 
 		// リクエストパラメータの取得
-		String userid = request.getParameter("userid");
+		String id = request.getParameter("id");
 		String password = request.getParameter("password");
-
+		
+		UserDAO dao=new UserDAO();
 		try {
-			// DAOの生成
-			UserDAO userDao = new UserDAO();
-
-			// DAOの利用
-			if (userDao.loginCheck(userid, password)) {
-				// 認証成功
-				url = "menu-servlet";
+			boolean isLogin=dao.loginCheck(id, password);
+			if(isLogin) {
 
 				// セッションオブジェクトの取得
 				HttpSession session = request.getSession();
 
 				// セッションスコープへの属性の設定
-				session.setAttribute("id", userid);
-
+				session.setAttribute("id", id);
+ 
+				url="/WEB-INF/menu.jsp";
 			} else {
 				// 認証失敗
 				url = "login-failure.jsp";
 			}
 
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-
 		// リクエストの転送
 		RequestDispatcher rd = request.getRequestDispatcher(url);
 		rd.forward(request, response);
+	
+
+
+		} catch (ClassNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
+		
 	}
 
 }
