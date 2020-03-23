@@ -11,7 +11,7 @@ import java.sql.SQLException;
 public class ConnectionManager {
 
 	
-	private final static String URL = "jdbc:postgresql://localhost:5432/sunselco?useSSL=false";
+	private final static String URL = "jdbc:postgresql://localhost:5432/sunselco";
 
 	
 	private final static String USER = "postgres";
