@@ -1,0 +1,89 @@
+package servlet;
+
+import java.io.IOException;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+@WebServlet("/CreateAccount")
+
+public class CreateAccount extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+
+    public CreateAccount() {
+        super();
+
+    }
+
+
+	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		response.getWriter().append("Served at: ").append(request.getContextPath());
+
+
+		//アカウント作成画面をフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/CreateAccount.jsp");
+		dispatcher.forward(request, response);
+
+
+		//登録処理の呼び出し
+		CreateLogic logic = new CreateLogic();
+		logic.execute(CreateAccount);
+
+	}
+
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+
+		//リクエストパラメータの取得
+		request.setCharacterEncoding("UTF-8");
+		String id = request.getParameter("id");
+		String password = request.getParameter("password");
+		String name = request.getParameter("name");
+
+		//INSERT文を指定する
+				String sql = "INSERT accountTable "
+						+ "SET id = id,password = password,name = name";
+				try {
+					//登録するDBのパラメータとSQL文を指定する。
+					ps = conn.prepareStatement(sql);
+
+					//INSERT文を実行する
+					int i = ps.executeUpdate();
+
+					//コミット
+					conn.commit();
+
+					//画面分岐
+					boolean b = true;
+
+				}catch (Exception ex) {
+
+					conn.rollback();      //ロールバック
+					ex.printStackTrace(); //エラー内容を表示する
+					boolean b = false;
+
+				}finally {
+
+					if(
+							b == true){
+
+		//アカウント登録成功画面をフォワード
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/CreateAccountResult.jsp");
+		dispatcher.forward(request,response);
+
+		}else {
+		//アカウント登録失敗画面をフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/CreateAccountFailure.jsp");
+		dispatcher.forward(request, response);
+		}
+
+	}
+
+}
+
+}

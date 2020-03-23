@@ -1,0 +1,94 @@
+package model.dao;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
+
+import model.UserBean;
+
+public class UserDAO {
+
+	public boolean loginCheck(String userId, String password) throws ClassNotFoundException, SQLException {
+
+		String sql = "SELECT * FROM accounttable WHERE id = ? AND password = ?";
+
+		// データベースへの接続の取得、PreparedStatementの取得
+		try(Connection con = ConnectionManager.getConnection();
+				PreparedStatement pstmt =  con.prepareStatement(sql)){
+
+			// プレースホルダへの値の設定
+			pstmt.setString(1, userId);
+			pstmt.setString(2, password);
+
+			// SQLステートメントの実行
+			ResultSet res = pstmt.executeQuery();
+
+			// 結果の操作
+			if(res.next()) {
+				return true;
+			}
+		}
+		return false;
+	}
+
+	public List<UserBean> selectAllUsers() throws ClassNotFoundException, SQLException {
+		List<UserBean> list = new ArrayList<UserBean>();
+
+		String sql = "SELECT * FROM accounttable";
+
+		// データベースへの接続の取得、Statementの取得、SQLステートメントの実行
+		try(Connection con = ConnectionManager.getConnection();
+				Statement stmt =  con.createStatement();
+				ResultSet res = stmt.executeQuery(sql)){
+
+			// 結果の操作
+			while(res.next()) {
+				UserBean user = new UserBean();
+				user.setId(res.getString("id"));
+				user.setName(res.getString("name"));
+				user.setLevel(res.getInt("level"));
+				user.setPassword(res.getString("password"));
+				list.add(user);
+			}
+		}
+
+		return list;
+	}
+
+	public boolean accountDelete(String id_ch,String password_ch,String name_ch,String seachId) throws ClassNotFoundException, SQLException{
+
+		//SQLの指定
+		String sql = "UPDATE accounttable SET id = ?,password = ?,name = ? WHERE id = ?";
+
+		// データベースへの接続の取得、Statementの取得、SQLステートメントの実行
+		try(Connection con = ConnectionManager.getConnection();
+				Statement stmt =  con.createStatement();
+				ResultSet res = stmt.executeQuery(sql)){
+
+			PreparedStatement pstmt = con.prepareStatement(sql);
+
+			// 結果の操作
+			pstmt.setString(1,id_ch);
+			pstmt.setString(2,password_ch);
+			pstmt.setString(3, name_ch);
+			pstmt.setString(4, seachId);
+			int r = pstmt.executeUpdate();
+
+			//DBを閉じる
+			pstmt.close();
+
+			if(r != 0) {
+				return true;
+			}
+
+		}
+
+		return false;
+
+	}
+}
+//aaa

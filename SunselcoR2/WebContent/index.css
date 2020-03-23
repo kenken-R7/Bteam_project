@@ -1,0 +1,31 @@
+.stitch {
+   color: #fff;
+   padding: 20px;
+   font-size: 22px;
+   background: #FEA993;
+   border: 2px dashed #F7F9CC;
+   border-radius: 10px;
+   box-shadow: 0 0 0 7px #FEA993;
+}
+body {
+  text-align:center;
+	background-color: #FFEBCD;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  border-radius: 4px;
+  color: #ffffff;
+  background-image: linear-gradient(45deg, #FFC107 0%, #ff8b5f 100%);
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+  border-bottom: solid 3px #c58668;
+}
+.btn:active {
+  /*ボタンを押したとき*/
+ -webkit-transform: translateY(4px);
+  transform: translateY(4px);
+  box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
+  border-bottom: none;
+}
