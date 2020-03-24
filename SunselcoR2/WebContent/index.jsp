@@ -17,7 +17,7 @@
 		<img src="サンセルコ.jpg">
 	</p>
 
-	<form action="/SunselcoR2/loginPage.jsp" method="POST">
+	<form action="/SunselcoR2/loginservlet" method="GET">
 		<input type="submit" class="btn" value="メニューへ">
 	</form>
 

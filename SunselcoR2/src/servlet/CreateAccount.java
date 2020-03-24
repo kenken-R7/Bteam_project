@@ -46,12 +46,12 @@ if(isLogin) {
 
 
 		//アカウント登録成功画面をフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/CreateAccountResult.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/CreateAccountResult.jsp");
 		dispatcher.forward(request,response);
 
 		}else {
 		//アカウント登録失敗画面をフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/CreateAccountFailure.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/CreateAccountFailure.jsp");
 		dispatcher.forward(request, response);
 		}
 

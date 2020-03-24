@@ -9,8 +9,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import dao.UserDAO;
+import model.dao.UserBean;
 
 /**
  * Servlet implementation class LoginConterollerServlet
@@ -18,7 +20,7 @@ import dao.UserDAO;
 @WebServlet("/LoginConterollerServlet")
 public class LoginConterollerServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
+
     /**
      * @see HttpServlet#HttpServlet()
      */
@@ -47,12 +49,17 @@ public class LoginConterollerServlet extends HttpServlet {
 		// リクエストパラメータの取得
 		String id = request.getParameter("id");
 		String password = request.getParameter("password");
-		
+
 		UserDAO dao=new UserDAO();
+
 		try {
 			boolean isLogin=dao.loginCheck(id, password);
 			if(isLogin) {
 				url="/WEB-INF/menu.jsp";
+				UserBean user2=new UserBean();
+				user2=dao.sendUser();
+				HttpSession sis=request.getSession();
+				sis.setAttribute("user",user2);
 			} else {
 				// 認証失敗
 				url = "login-failure.jsp";
@@ -61,7 +68,7 @@ public class LoginConterollerServlet extends HttpServlet {
 		// リクエストの転送
 		RequestDispatcher rd = request.getRequestDispatcher(url);
 		rd.forward(request, response);
-	
+
 
 
 		} catch (ClassNotFoundException e) {
@@ -71,7 +78,7 @@ public class LoginConterollerServlet extends HttpServlet {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}
-		
+
 	}
 
 }

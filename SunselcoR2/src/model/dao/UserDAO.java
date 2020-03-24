@@ -10,6 +10,8 @@ import java.util.List;
 import model.UserBean;
 
 public class UserDAO {
+
+	private UserBean user=new UserBean();
 	//テーブル内の情報をリストに取得されるメソッド
 	public List<UserBean> userList() throws SQLException,ClassNotFoundException{
 		try(Connection con=ConnectionManager.getConnection()){
@@ -39,8 +41,9 @@ public class UserDAO {
 
 				for(UserBean user1:list) {
 					if(user1.getId().equals(id)&&user1.getPassword().equals(pass)) {
+						this.user=user1;
 						return true;
-						
+
 					}
 
 
@@ -58,10 +61,15 @@ public void accountMake(String id,String password,String name) throws SQLExcepti
 		pStmt.setString(1, id);
 		pStmt.setString(2, password);
 		pStmt.setString(3, name);
-		pStmt.executeUpdate(sql);
+		int result =pStmt.executeUpdate();
 		con.commit();
+		
 	}
 
-	}
-	
 }
+public UserBean sendUser() {
+	return this.user;
+}
+}
+
+

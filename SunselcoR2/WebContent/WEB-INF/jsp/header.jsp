@@ -1,7 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="model.UserBean" %>
 <!-- セッションスコープから名前を取得 -->
-<%	String name = (String)session.getAttribute("name");%>
+<% UserBean user=(UserBean)session.getAttribute("user");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -9,6 +10,6 @@
 <title>ヘッダー</title>
 </head>
 <body>
-ログインユーザ：<%=name %>
+ログインユーザ：<%= user.getName() %>
 </body>
 </html>
