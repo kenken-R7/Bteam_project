@@ -11,13 +11,13 @@
 	<form action="gameStart.jsp" method="POST">
 		<input type="submit" value="GAME">
 	</form>
-	<form action="accountManagement.jsp" method="POST">
+	<form action="/SunselcoR2/AccountManagement" method="GET">
 		<input type="submit" value="アカウント">
 	</form>
 	<form action="link.jsp" method="POST">
 		<input type="submit" value="外部リンク">
 	</form>
-	<form action="index.jsp" method="POST">
+	<form action="/SunselcoR2/" method="POST">
 		<input type="submit" value="ログアウト">
 	</form>
 </body>

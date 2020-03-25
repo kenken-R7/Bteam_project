@@ -1,10 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+  <%@ page import="model.UserBean" %>  
 <%--セッションスコープからユーザー情報を取得--%>
-<% 	String id = (String)session.getAttribute("id");
-	String password = (String)session.getAttribute("password");
-	String name = (String)session.getAttribute("name");%>
+<% UserBean user=(UserBean)session.getAttribute("user");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,17 +13,17 @@
 	<form action="/sunselcoR1/CreateAccount" method="post">
 		<label> 
 		<!-- 現在のIDを表示 -->
-		現在のID：<%=id %><br>
+		現在のID：<%=user.getId() %><br>
 		ID:<input type="text" name="id" pattern="^[0-9A-Za-z]+$" required>（半角英数）※必須
 		</label><br> 
 		<label>
 		<!-- 現在のパスワードを表示 -->
-		現在のパスワード：<%=password %><br>
+		現在のパスワード：<%=user.getPassword() %><br>
 		 パスワード:<input type="password" name="password" pattern="^[0-9A-Za-z]+$" required>（半角英数）※必須
 		</label><br> 
 		<label>
 		<!-- 現在の名前を表示 -->
-		現在の名前：<%=name %><br>
+		現在の名前：<%=user.getName() %><br>
 		 名前:<input type="text" name="name" required>※必須
 		</label><br> 
 		<input type="submit" value="変更"><br>
