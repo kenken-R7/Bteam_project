@@ -61,15 +61,30 @@ public void accountMake(String id,String password,String name) throws SQLExcepti
 		pStmt.setString(1, id);
 		pStmt.setString(2, password);
 		pStmt.setString(3, name);
-		int result =pStmt.executeUpdate();
+		pStmt.executeUpdate();
 		con.commit();
-		
+		con.setAutoCommit(true);
 	}
 
 }
 public UserBean sendUser() {
 	return this.user;
 }
+public void changeAcount(String id,String password,String name) throws SQLException,ClassNotFoundException {
+	UserBean user=new UserBean();
+	UserDAO dao=new UserDAO();
+	user=dao.sendUser();
+	try(Connection con=ConnectionManager.getConnection()){
+	String sql="UPDATE accounttable SET id=?,password=?,name=? WHERE id=?;";
+	PreparedStatement pStmt=con.prepareStatement(sql);
+	pStmt.setString(1, id);
+	pStmt.setString(2, password);
+	pStmt.setString(3, name);
+	pStmt.setString(4, user.getId());
+	pStmt.executeUpdate();
+	con.commit();
+	con.setAutoCommit(true);
 }
-
+}
+}
 

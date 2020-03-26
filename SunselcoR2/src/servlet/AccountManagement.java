@@ -19,10 +19,10 @@ public class AccountManagement extends HttpServlet {
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.getWriter().append("Served at: ").append(request.getContextPath());
+		
 
 		//アカウント管理画面をフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/accountManagement.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/accountManagemant1.jsp");
 		dispatcher.forward(request, response);
 
 	}

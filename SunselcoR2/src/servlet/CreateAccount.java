@@ -25,7 +25,8 @@ public class CreateAccount extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+RequestDispatcher dis=request.getRequestDispatcher("/WEB-INF/jsp/createAccount.jsp");
+dis.forward(request, response);
 
 
 

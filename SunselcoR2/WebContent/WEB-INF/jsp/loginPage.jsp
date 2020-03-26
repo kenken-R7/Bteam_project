@@ -16,9 +16,11 @@
 		 パスワード:<input type="password" name="password" pattern="^[0-9A-Za-z]+$" required>（半角英数）※必須
 		</label><br>
 		<input type="submit" value="ログイン"><br>
+		
+		
 	</form>
 
-	<form action="createAccount.jsp" method="POST">
+	<form action="/SunselcoR2/CreateAccount" method="GET">
 		<input type="submit" value="アカウント作成">
 	</form>
 </body>
