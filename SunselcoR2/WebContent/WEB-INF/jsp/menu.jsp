@@ -4,21 +4,25 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<link rel="stylesheet" href="index.css" type="text/css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=10.0, user-scalable=yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
 <title>メニュー画面</title>
 </head>
 <body>
-	<%@ include file="header.jsp"%>
-	<form action="gameStart.jsp" method="POST">
-		<input type="submit" value="GAME">
+	<%@ include file="header.jsp"%><br><br>
+
+	<form action="/SunselcoR2/GameProgress" method="get">
+		<p><input type="submit" class="btn" value="GAME"></p>
 	</form>
-	<form action="/SunselcoR2/AccountManagement" method="GET">
-		<input type="submit" value="アカウント">
+	<form action="/SunselcoR2/AccountManagement" method="get">
+		<p><input type="submit" class="btn" value="アカウント"></p>
 	</form>
 	<form action="link.jsp" method="POST">
-		<input type="submit" value="外部リンク">
+		<p><input type="submit" class="btn" value="外部リンク"></p>
 	</form>
-	<form action="/SunselcoR2/" method="POST">
-		<input type="submit" value="ログアウト">
+	<form action="index.jsp" method="POST">
+		<p><input type="submit" class="btn" value="ログアウト"></p>
 	</form>
 </body>
 </html>

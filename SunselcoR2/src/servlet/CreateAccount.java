@@ -25,8 +25,8 @@ public class CreateAccount extends HttpServlet {
 
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-RequestDispatcher dis=request.getRequestDispatcher("/WEB-INF/jsp/createAccount.jsp");
-dis.forward(request, response);
+    RequestDispatcher dispatcher=request.getRequestDispatcher("/WEB-INF/jsp/createAccount.jsp");
+    dispatcher.forward(request, response);
 
 
 
@@ -47,22 +47,26 @@ if(isLogin) {
 
 
 		//アカウント登録成功画面をフォワード
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/CreateAccountResult.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/createResult.jsp");
 		dispatcher.forward(request,response);
 
 		}else {
 		//アカウント登録失敗画面をフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/CreateAccountFailure.jsp");
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/CreateFailure.jsp");
 		dispatcher.forward(request, response);
 		}
 
 	}catch(SQLException e) {
 		e.printStackTrace();
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/CreateFailure.jsp");
+		dispatcher.forward(request, response);
 	}catch(ClassNotFoundException e) {
 		e.printStackTrace();
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/CreateFailure.jsp");
+		dispatcher.forward(request, response);
+	}finally {
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/CreateFailure.jsp");
+		dispatcher.forward(request, response);
 	}
-
 	}
 	}
-
-

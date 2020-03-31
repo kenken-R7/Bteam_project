@@ -14,29 +14,24 @@ import javax.servlet.http.HttpSession;
 import model.UserBean;
 import model.dao.UserDAO;
 
-//アカウント管理画面をフォワードするサーブレット
-@WebServlet("/AccountManagement")
-public class AccountManagement extends HttpServlet {
+//アカウントを削除するサーブレット
+@WebServlet("/AccountDelete")
+public class AccountDelete extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public AccountManagement() {
+    public AccountDelete() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		//アカウント管理画面をフォワードする
-		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/accountManagement.jsp");
+		//アカウント削除画面をフォワードする
+		RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/accountDelete.jsp");
 		dispatcher.forward(request, response);
 
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		//リクエストパラメータを取得
-		String id_ch = request.getParameter("id");
-		String password_ch = request.getParameter("password");
-		String name_ch = request.getParameter("name");
 
 		//DAOの生成
 		UserDAO dao = new UserDAO();
@@ -48,21 +43,20 @@ public class AccountManagement extends HttpServlet {
 
 		try {
 			// DAOの利用
-			boolean b = dao.accountChange(id_ch,password_ch,name_ch,seachId);
+			boolean b = dao.accountDelete(seachId);
 
 			if(b == true){
-				//アカウント変更成功画面をフォワードする
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/accountChangeResult.jsp");
+				//アカウント削除成功のフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/accountDeleteResult.jsp");
 				dispatcher.forward(request, response);
 			}else {
-				//アカウント変更失敗画面をフォワードする
-				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/accountChangeFailure.jsp");
+				//アカウント削除失敗のフォワードする
+				RequestDispatcher dispatcher = request.getRequestDispatcher("/WEB-INF/jsp/accountDeleteFailure.jsp");
 				dispatcher.forward(request, response);
 			}
 		} catch (SQLException | ClassNotFoundException e) {
 			e.printStackTrace();
 		}
-
 
 	}
 

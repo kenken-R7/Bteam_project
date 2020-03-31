@@ -70,21 +70,78 @@ public void accountMake(String id,String password,String name) throws SQLExcepti
 public UserBean sendUser() {
 	return this.user;
 }
-public void changeAcount(String id,String password,String name) throws SQLException,ClassNotFoundException {
-	UserBean user=new UserBean();
-	UserDAO dao=new UserDAO();
-	user=dao.sendUser();
-	try(Connection con=ConnectionManager.getConnection()){
-	String sql="UPDATE accounttable SET id=?,password=?,name=? WHERE id=?;";
-	PreparedStatement pStmt=con.prepareStatement(sql);
-	pStmt.setString(1, id);
-	pStmt.setString(2, password);
-	pStmt.setString(3, name);
-	pStmt.setString(4, user.getId());
-	pStmt.executeUpdate();
-	con.commit();
-	con.setAutoCommit(true);
+//public void changeAcount(String id,String password,String name) throws SQLException,ClassNotFoundException {
+//	UserBean user=new UserBean();
+// dao=new UserDAO();
+//	user=dao.sendUser();
+//	try(Connection con=ConnectionManager.getConnection()){
+//	String sql="UPDATE accounttable SET id=?,password=?,name=? WHERE id=?;";
+//	PreparedStatement pStmt=con.prepareStatement(sql);
+//	pStmt.setString(1, id);
+//	pStmt.setString(2, password);
+//	pStmt.setString(3, name);
+//	pStmt.setString(4, user.getId());
+//	pStmt.executeUpdate();
+//	con.commit();
+//	con.setAutoCommit(true);
+//}
+//}
+
+	public boolean accountChange(String id_ch,String password_ch,String name_ch,String seachId) throws ClassNotFoundException, SQLException{
+
+		//SQLの指定
+		String sql = "UPDATE accounttable SET id = ?,password = ?,name = ? WHERE id = ?";
+
+		// データベースへの接続の取得、Statementの取得、SQLステートメントの実行
+		try(Connection con = ConnectionManager.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+
+				// 結果の操作
+				pstmt.setString(1,id_ch);
+				pstmt.setString(2,password_ch);
+				pstmt.setString(3, name_ch);
+				pstmt.setString(4, seachId);
+				int r = pstmt.executeUpdate();
+
+				//DBを閉じる
+				pstmt.close();
+
+				if(r != 0) {
+					return true;
+				}
+
+			}
+
+		return false;
+
+	}
+
+	public boolean accountDelete(String seachId) throws ClassNotFoundException, SQLException{
+
+		//SQLの指定
+		String sql = "DELETE FROM accounttable WHERE id = ?";
+
+		// データベースへの接続の取得、Statementの取得、SQLステートメントの実行
+		try(Connection con = ConnectionManager.getConnection();
+			PreparedStatement pstmt = con.prepareStatement(sql);){
+
+				// 結果の操作
+				pstmt.setString(1, seachId);
+				int r = pstmt.executeUpdate();
+
+				//DBを閉じる
+				pstmt.close();
+
+				if(r != 0) {
+					return true;
+				}
+
+			}
+
+		return false;
+
+	}
+
 }
-}
-}
+
 

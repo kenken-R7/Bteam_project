@@ -1,3 +1,4 @@
+@charset "UTF-8";
 
 .stitch {
    color: #fff;
@@ -13,6 +14,23 @@ body {
   text-align:center;
 	background-color: #FFEBCD;
 	-webkit-text-size-adjust: 100%;
+}
+
+
+.btn-sticky {
+  display: inline-block;
+  padding: 0.5em 1em;
+  text-decoration: none;
+  background: #f7f7f7;
+  border-left: solid 6px #ff7c5c;/*左線*/
+  color: #ff7c5c;/*文字色*/
+  font-weight: bold;
+  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+}
+
+.btn-sticky:active {
+  box-shadow: inset 0 0 2px rgba(128, 128, 128, 0.1);
+  transform: translateY(2px);
 }
 
 .btn {
@@ -32,22 +50,18 @@ body {
   transform: translateY(4px);
   box-shadow: 0px 0px 1px rgba(0, 0, 0, 0.2);
   border-bottom: none;
+
+form{
+  padding:30px 50px;
 }
 
-.btn-sticky {
-  display: inline-block;
-  padding: 0.5em 1em;
-  text-decoration: none;
-  background: #f7f7f7;
-  border-left: solid 6px #ff7c5c;/*左線*/
-  color: #ff7c5c;/*文字色*/
-  font-weight: bold;
-  box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.29);
+form dl dt{
+  width: 165px;
+  padding:10px 0;
+  float:left;
+  clear:both;
 }
 
-.btn-sticky:active {
-  box-shadow: inset 0 0 2px rgba(128, 128, 128, 0.1);
-  transform: translateY(2px);
+form dl dd{
+  padding:10px 0;
 }
-
-

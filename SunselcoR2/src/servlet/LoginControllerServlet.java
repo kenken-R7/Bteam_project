@@ -50,7 +50,7 @@ public class LoginControllerServlet extends HttpServlet {
 				url="/WEB-INF/jsp/menu.jsp";
 			} else {
 				// 認証失敗
-				url = "/WEB-INF/jsp/login-failure.jsp";
+				url = "/WEB-INF/jsp/login-Failure.jsp";
 			}
 
 
@@ -71,3 +71,4 @@ public class LoginControllerServlet extends HttpServlet {
 	}
 
 }
+
